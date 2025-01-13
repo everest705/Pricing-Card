@@ -1,0 +1,350 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css" rel="stylesheet">
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #1a202c 0%, #2d3748 100%);
+            padding: 40px 20px;
+        }
+
+        .title-section {
+            text-align: center;
+            margin-bottom: 3rem;
+            color: white;
+        }
+
+        .main-title {
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            background: linear-gradient(45deg, #60a5fa, #db2777);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            animation: titleGlow 2s ease-in-out infinite alternate;
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            color: #a0aec0;
+        }
+
+        @keyframes titleGlow {
+            from {
+                text-shadow: 0 0 20px rgba(96, 165, 250, 0.5);
+            }
+            to {
+                text-shadow: 0 0 30px rgba(219, 39, 119, 0.5);
+            }
+        }
+
+        .toggle-container {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 1rem;
+            border-radius: 15px;
+            margin-bottom: 3rem;
+            backdrop-filter: blur(10px);
+        }
+
+        .toggle-switch {
+            background: rgba(255, 255, 255, 0.05);
+            padding: 0.5rem;
+            border-radius: 999px;
+            display: inline-flex;
+            gap: 0.5rem;
+        }
+
+        .toggle-btn {
+            padding: 0.75rem 1.5rem;
+            border: none;
+            border-radius: 999px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            color: #a0aec0;
+            background: transparent;
+        }
+
+        .toggle-btn.active {
+            background: linear-gradient(45deg, #60a5fa, #db2777);
+            color: white;
+            box-shadow: 0 4px 15px rgba(219, 39, 119, 0.3);
+        }
+
+        .pricing-container {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            perspective: 1000px;
+        }
+
+        .pricing-plan {
+            background: rgba(255, 255, 255, 0.1);
+            backdrop-filter: blur(10px);
+            border-radius: 20px;
+            padding: 2.5rem;
+            width: 350px;
+            transition: all 0.4s ease;
+            position: relative;
+            overflow: hidden;
+            border: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        .pricing-plan:hover {
+            transform: translateY(-10px) rotateX(5deg);
+            border-color: rgba(219, 39, 119, 0.5);
+            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .popular {
+            background: linear-gradient(135deg, rgba(96, 165, 250, 0.1), rgba(219, 39, 119, 0.1));
+            border: 2px solid rgba(219, 39, 119, 0.3);
+        }
+
+        .popular::before {
+            content: "Most Popular";
+            position: absolute;
+            top: 1.5rem;
+            right: -4rem;
+            background: linear-gradient(45deg, #60a5fa, #db2777);
+            color: white;
+            padding: 0.5rem 5rem;
+            transform: rotate(45deg);
+            font-size: 0.875rem;
+            font-weight: 600;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
+        }
+
+        .plan-header {
+            text-align: center;
+            margin-bottom: 2rem;
+            position: relative;
+        }
+
+        .plan-name {
+            font-size: 1.8rem;
+            font-weight: 700;
+            color: white;
+            margin-bottom: 1rem;
+        }
+
+        .price {
+            font-size: 3.5rem;
+            font-weight: 800;
+            color: #60a5fa;
+            margin-bottom: 0.5rem;
+            text-shadow: 0 2px 10px rgba(96, 165, 250, 0.3);
+        }
+
+        .price-period {
+            color: #a0aec0;
+            font-size: 1rem;
+        }
+
+        .features {
+            list-style: none;
+            margin: 2rem 0;
+        }
+
+        .feature {
+            display: flex;
+            align-items: center;
+            margin: 1.5rem 0;
+            color: #e2e8f0;
+            font-size: 1.1rem;
+        }
+
+        .feature i {
+            margin-right: 1rem;
+            font-size: 1.2rem;
+            width: 24px;
+            height: 24px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(45deg, #60a5fa, #db2777);
+            border-radius: 50%;
+            color: white;
+        }
+
+        .subscribe-btn {
+            width: 100%;
+            padding: 1.2rem;
+            border: none;
+            border-radius: 12px;
+            font-weight: 600;
+            font-size: 1.1rem;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            position: relative;
+            overflow: hidden;
+            background: linear-gradient(45deg, #60a5fa, #db2777);
+            color: white;
+        }
+
+        .subscribe-btn::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(45deg, transparent, rgba(255, 255, 255, 0.2), transparent);
+            transition: 0.5s;
+        }
+
+        .subscribe-btn:hover::before {
+            left: 100%;
+        }
+
+        .subscribe-btn:hover {
+            transform: scale(1.05);
+            box-shadow: 0 10px 20px rgba(219, 39, 119, 0.3);
+        }
+
+        @media (max-width: 1100px) {
+            .pricing-container {
+                flex-direction: column;
+                align-items: center;
+                gap: 3rem;
+            }
+
+            .pricing-plan {
+                width: 100%;
+                max-width: 400px;
+            }
+
+            .main-title {
+                font-size: 2rem;
+            }
+
+            .subtitle {
+                font-size: 1rem;
+                padding: 0 1rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="title-section">
+        <h1 class="main-title">Choose Your Perfect Plan</h1>
+        <p class="subtitle">Select the best pricing plan for your needs</p>
+    </div>
+
+    <div class="toggle-container">
+        <div class="toggle-switch">
+            <button class="toggle-btn active" onclick="togglePricing('monthly')">Monthly</button>
+            <button class="toggle-btn" onclick="togglePricing('yearly')">Yearly</button>
+        </div>
+    </div>
+
+    <div class="pricing-container">
+        <div class="pricing-plan">
+            <div class="plan-header">
+                <h3 class="plan-name">Basic Plan</h3>
+                <div class="price">$10</div>
+                <div class="price-period">per month</div>
+            </div>
+            <ul class="features">
+                <li class="feature">
+                    <i class="fas fa-hdd"></i>
+                    10GB Storage
+                </li>
+                <li class="feature">
+                    <i class="fas fa-users"></i>
+                    2 Users
+                </li>
+                <li class="feature">
+                    <i class="fas fa-envelope"></i>
+                    Email Support
+                </li>
+            </ul>
+            <button class="subscribe-btn">Get Started</button>
+        </div>
+
+        <div class="pricing-plan popular">
+            <div class="plan-header">
+                <h3 class="plan-name">Standard Plan</h3>
+                <div class="price">$20</div>
+                <div class="price-period">per month</div>
+            </div>
+            <ul class="features">
+                <li class="feature">
+                    <i class="fas fa-hdd"></i>
+                    50GB Storage
+                </li>
+                <li class="feature">
+                    <i class="fas fa-users"></i>
+                    5 Users
+                </li>
+                <li class="feature">
+                    <i class="fas fa-headset"></i>
+                    Priority Support
+                </li>
+            </ul>
+            <button class="subscribe-btn">Get Started</button>
+        </div>
+
+        <div class="pricing-plan">
+            <div class="plan-header">
+                <h3 class="plan-name">Premium Plan</h3>
+                <div class="price">$30</div>
+                <div class="price-period">per month</div>
+            </div>
+            <ul class="features">
+                <li class="feature">
+                    <i class="fas fa-hdd"></i>
+                    100GB Storage
+                </li>
+                <li class="feature">
+                    <i class="fas fa-users"></i>
+                    Unlimited Users
+                </li>
+                <li class="feature">
+                    <i class="fas fa-clock"></i>
+                    24/7 Support
+                </li>
+            </ul>
+            <button class="subscribe-btn">Get Started</button>
+        </div>
+    </div>
+
+    <script>
+        function togglePricing(period) {
+            const prices = document.querySelectorAll('.price');
+            const periods = document.querySelectorAll('.price-period');
+            const buttons = document.querySelectorAll('.toggle-btn');
+            
+            buttons.forEach(btn => btn.classList.remove('active'));
+            event.target.classList.add('active');
+
+            if (period === 'yearly') {
+                prices[0].textContent = '$100';
+                prices[1].textContent = '$200';
+                prices[2].textContent = '$300';
+                periods.forEach(p => p.textContent = 'per year');
+            } else {
+                prices[0].textContent = '$10';
+                prices[1].textContent = '$20';
+                prices[2].textContent = '$30';
+                periods.forEach(p => p.textContent = 'per month');
+            }
+        }
+    </script>
+</body>
+</html>
